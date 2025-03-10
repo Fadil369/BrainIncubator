@@ -1,0 +1,23 @@
+{
+    "NSPrivacyTracking": false,
+    "NSPrivacyTrackingDomains": [],
+    "NSPrivacyCollectedData": [
+        {
+            "NSPrivacyDataType": "NSPrivacyDataTypeOtherData",
+            "NSPrivacyDataReason": "App functionality",
+            "NSPrivacyDataCollection": ["Progress tracking", "Assessment results"],
+            "NSPrivacyDataStorage": "Local only",
+            "NSPrivacyDataSharing": "Not shared"
+        }
+    ],
+    "NSPrivacyAccessedAPITypes": [
+        {
+            "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryUserDefaults",
+            "NSPrivacyAccessedAPITypeReason": "Store user preferences"
+        },
+        {
+            "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryNotifications",
+            "NSPrivacyAccessedAPITypeReason": "Send progress reminders"
+        }
+    ]
+}

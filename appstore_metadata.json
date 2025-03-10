@@ -1,0 +1,99 @@
+{
+    "version": "1.0.0",
+    "copyright": "© 2024 BrainIncubator",
+    "primaryCategory": "Medical",
+    "secondaryCategory": "Education",
+    "privacyPolicyUrl": "https://brainincubator.com/privacy",
+    "marketingUrl": "https://brainincubator.com",
+    "supportUrl": "https://brainincubator.com/support",
+    "description": {
+        "en-US": "BrainIncubator helps healthcare professionals transition to ICD-11 with comprehensive training modules, assessments, and progress tracking. Features include:\n\n• Interactive training modules\n• Self, team, and organizational assessments\n• Progress tracking and notifications\n• Dark mode support\n• Comprehensive ICD-11 documentation\n• Privacy-focused local data storage",
+        "keywords": [
+            "ICD-11",
+            "medical coding",
+            "healthcare training",
+            "medical education",
+            "clinical documentation"
+        ]
+    },
+    "screenshotSizes": {
+        "iPhone": {
+            "6.5": {
+                "size": "1242x2688"
+            },
+            "5.5": {
+                "size": "1242x2208"
+            }
+        },
+        "iPad": {
+            "12.9": {
+                "size": "2048x2732"
+            }
+        }
+    },
+    "ageRating": {
+        "kidsAgeBand": false,
+        "gambling": false,
+        "contests": false,
+        "horror": false,
+        "medicalDrugs": true,
+        "profanity": false,
+        "sexualContent": false,
+        "violence": false
+    },
+    "localizations": [
+        "en-US",
+        "en-GB",
+        "es-ES",
+        "fr-FR",
+        "de-DE",
+        "ja-JP"
+    ],
+    "releaseNotes": {
+        "en-US": "Initial release of BrainIncubator:\n• Complete ICD-11 training modules\n• Assessment tools for individuals and teams\n• Progress tracking and notifications\n• Dark mode support"
+    },
+    "default_language": "en-US",
+    "details": {
+        "en-US": {
+            "name": "BrainIncubator",
+            "subtitle": "AI-Powered Learning Platform",
+            "privacy_url": "https://brainincubator.app/privacy",
+            "description": "BrainIncubator is an innovative learning platform that uses artificial intelligence to create personalized learning experiences. Track your progress, receive smart recommendations, and achieve your learning goals efficiently.",
+            "keywords": [
+                "learning",
+                "education",
+                "AI",
+                "personalized learning",
+                "training",
+                "skills development",
+                "smart learning",
+                "education platform"
+            ],
+            "promotional_text": "Experience the future of learning with AI-powered personalization",
+            "support_url": "https://brainincubator.app/support",
+            "marketing_url": "https://brainincubator.app",
+            "release_notes": "Initial release with core learning features and AI-powered recommendations"
+        }
+    },
+    "categories": {
+        "primary": "EDUCATION",
+        "secondary": "PRODUCTIVITY"
+    },
+    "pricing": {
+        "tier": "TIER_2",
+        "free_trial": true
+    },
+    "app_rating": {
+        "rating": "4+",
+        "gambling": false,
+        "contests": false,
+        "unrestricted_web": false
+    },
+    "version_requirements": {
+        "minimum_os_version": "15.0",
+        "device_families": ["iphone", "ipad"],
+        "requires_fullscreen": false,
+        "supports_game_controller": false,
+        "game_center_enabled": false
+    }
+}

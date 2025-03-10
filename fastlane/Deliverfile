@@ -1,0 +1,49 @@
+# The Deliverfile allows you to store various App Store Connect metadata
+# For more information, see: https://docs.fastlane.tools/actions/deliver/
+
+# Price tier
+price_tier(2)
+
+# App Rating settings
+app_rating_config_path("./rating.json")
+
+# Categories
+primary_category("EDUCATION")
+secondary_category("PRODUCTIVITY")
+
+# Keywords and descriptions are loaded from JSON files
+app_review_information(
+  first_name: "Brain",
+  last_name: "Incubator",
+  phone_number: "+1 234 567 8900",
+  email_address: "review@brainincubator.com",
+  demo_user: "demo@brainincubator.com",
+  demo_password: "demo-password",
+  notes: "Thank you for reviewing our app. All features are fully functional with the demo account."
+)
+
+# Submission information
+automatic_release(false)
+submit_for_review(true)
+submission_information({
+  add_id_info_uses_idfa: false,
+  export_compliance_uses_encryption: false,
+  content_rights_contains_third_party_content: false
+})
+
+# Phased release
+phased_release(true)
+
+# Make screenshots and metadata available in all App Store localizations
+supported_languages([
+  "en-US",
+  "es-ES",
+  "fr-FR",
+  "de-DE",
+  "ja-JP"
+])
+
+# App Store promotional text
+promotional_text(
+  "Experience adaptive learning powered by artificial intelligence. Train smarter, not harder."
+)

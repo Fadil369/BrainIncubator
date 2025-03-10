@@ -1,0 +1,38 @@
+{
+    "version": 1,
+    "ci": {
+        "name": "BrainIncubator CI",
+        "workflows": {
+            "build-test": {
+                "name": "Build and Test",
+                "actions": [
+                    {
+                        "name": "Build and Test",
+                        "action": "build",
+                        "scheme": "BrainIncubator",
+                        "platform": "iOS",
+                        "buildConfiguration": "Debug",
+                        "testPlan": "BrainIncubator"
+                    }
+                ]
+            },
+            "release": {
+                "name": "Release Build",
+                "actions": [
+                    {
+                        "name": "Build for Release",
+                        "action": "build",
+                        "scheme": "BrainIncubator",
+                        "platform": "iOS",
+                        "buildConfiguration": "Release",
+                        "certificateId": "Apple Distribution",
+                        "profileName": "BrainIncubator AppStore Profile"
+                    }
+                ],
+                "triggers": {
+                    "pushTags": ["v*"]
+                }
+            }
+        }
+    }
+}

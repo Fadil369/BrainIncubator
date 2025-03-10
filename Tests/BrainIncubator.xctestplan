@@ -1,0 +1,57 @@
+{
+  "configurations" : [
+    {
+      "id" : "B859E437-C925-4F28-9A59-68957B8B35C8",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:",
+      "identifier" : "BrainIncubator",
+      "name" : "BrainIncubator"
+    },
+    "testExecutionOrdering" : "random",
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "BrainIncubatorTests",
+        "name" : "BrainIncubatorTests"
+      },
+      "enabled" : true,
+      "parallelizable" : true,
+      "skippedTests" : [ ],
+      "testExecutionOrdering" : "random"
+    }
+  ],
+  "testConfigurations" : [
+    {
+      "name" : "Unit Tests",
+      "testTimeoutMultiplier" : 1.0,
+      "testRepetitionMode" : "retryOnFailure",
+      "maximumTestRepetitions" : 3
+    },
+    {
+      "name" : "UI Tests",
+      "testTimeoutMultiplier" : 2.0,
+      "testRepetitionMode" : "retryOnFailure",
+      "maximumTestRepetitions" : 2
+    },
+    {
+      "name" : "Accessibility Tests",
+      "testTimeoutMultiplier" : 1.5,
+      "testRepetitionMode" : "retryOnFailure",
+      "maximumTestRepetitions" : 2,
+      "testSpecificOptions" : {
+        "uiTestingScreenshotsOnFailure" : true
+      }
+    }
+  ],
+  "version" : 1
+}

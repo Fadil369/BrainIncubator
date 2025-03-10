@@ -1,0 +1,76 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  release:
+    types: [published]
+
+env:
+  DEVELOPER_DIR: /Applications/Xcode.app/Contents/Developer
+  MARKETING_VERSION: "1.0.0"
+
+jobs:
+  test:
+    name: Test
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Swift
+        uses: swift-actions/setup-swift@v1
+        
+      - name: Get swift version
+        run: swift --version
+        
+      - name: Run tests
+        run: swift test
+        
+      - name: Run UI Tests
+        run: xcodebuild test -scheme BrainIncubator -destination 'platform=iOS Simulator,name=iPhone 14,OS=latest'
+
+  build:
+    needs: test
+    name: Build
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Install provisioning profile
+        run: |
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          echo "${{ secrets.PROVISIONING_PROFILE }}" | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/profile.mobileprovision
+      
+      - name: Build for release
+        run: xcodebuild -scheme BrainIncubator -configuration Release -archivePath BrainIncubator.xcarchive archive
+        
+      - name: Export IPA
+        run: |
+          xcodebuild -exportArchive -archivePath BrainIncubator.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath ./builds
+          
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-release
+          path: builds/BrainIncubator.ipa
+
+  deploy:
+    needs: build
+    name: Deploy
+    runs-on: macos-latest
+    if: github.event_name == 'release'
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: app-release
+          
+      - name: Deploy to TestFlight
+        uses: apple-actions/upload-testflight-build@v1
+        with:
+          app-path: BrainIncubator.ipa
+          api-key-id: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+          api-private-key: ${{ secrets.APP_STORE_CONNECT_API_PRIVATE_KEY }}
+          api-key-issuer-id: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}

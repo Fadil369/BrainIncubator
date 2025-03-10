@@ -1,0 +1,48 @@
+"Home" = "الرئيسية";
+"Training" = "التدريب";
+"Assessment" = "التقييم";
+"Documentation" = "المستندات";
+"Settings" = "الإعدادات";
+
+// Auth
+"Sign In" = "تسجيل الدخول";
+"Sign Up" = "إنشاء حساب";
+"Email" = "البريد الإلكتروني";
+"Password" = "كلمة المرور";
+"Name" = "الاسم";
+"Forgot Password?" = "نسيت كلمة المرور؟";
+"Reset Password" = "إعادة تعيين كلمة المرور";
+
+// Training
+"Continue Training" = "متابعة التدريب";
+"Training Progress" = "تقدم التدريب";
+"Complete" = "مكتمل";
+"Start Module" = "بدء الوحدة";
+"Search modules..." = "البحث في الوحدات...";
+
+// Assessment
+"Current Progress" = "التقدم الحالي";
+"Self-Assessment" = "التقييم الذاتي";
+"Team Assessment" = "تقييم الفريق";
+"Organization Assessment" = "تقييم المؤسسة";
+"Score" = "النتيجة";
+
+// Subscription
+"Basic Plan" = "الخطة الأساسية";
+"Pro Plan" = "الخطة المتقدمة";
+"Enterprise Plan" = "خطة المؤسسات";
+"Monthly" = "شهريًا";
+"Yearly" = "سنويًا";
+"Subscribe" = "اشتراك";
+"Current Plan" = "الخطة الحالية";
+
+// Common
+"Continue" = "متابعة";
+"Cancel" = "إلغاء";
+"Close" = "إغلاق";
+"Save" = "حفظ";
+"Delete" = "حذف";
+"Edit" = "تعديل";
+"Success" = "نجاح";
+"Error" = "خطأ";
+"Loading..." = "جار التحميل...";

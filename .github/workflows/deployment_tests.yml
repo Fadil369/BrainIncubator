@@ -1,0 +1,77 @@
+name: Deployment Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deployment-tests:
+    name: Run Deployment Tests
+    runs-on: macos-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Swift
+      uses: swift-actions/setup-swift@v1
+      
+    - name: Run App Store Validation Tests
+      run: |
+        xcodebuild test -scheme BrainIncubator -destination 'platform=iOS Simulator,name=iPhone 14,OS=latest' -only-testing:BrainIncubatorTests/AppStoreValidationTests
+        
+    - name: Run Analytics Tests
+      run: |
+        xcodebuild test -scheme BrainIncubator -destination 'platform=iOS Simulator,name=iPhone 14,OS=latest' -only-testing:BrainIncubatorTests/AnalyticsManagerTests
+        
+    - name: Validate Screenshot Dimensions
+      run: |
+        xcodebuild test -scheme BrainIncubator -destination 'platform=iOS Simulator,name=iPhone 14,OS=latest' -only-testing:BrainIncubatorTests/ScreenshotGenerator/testScreenshotDimensions
+        
+    - name: Validate Localization Coverage
+      run: |
+        xcodebuild test -scheme BrainIncubator -destination 'platform=iOS Simulator,name=iPhone 14,OS=latest' -only-testing:BrainIncubatorTests/ScreenshotGenerator/testLocalizationCoverage
+        
+    - name: Check App Store Metadata
+      run: |
+        swift run deployment-check validate-metadata
+        
+    - name: Verify Privacy Manifest
+      run: |
+        swift run deployment-check verify-privacy-manifest
+
+  accessibility-tests:
+    name: Run Accessibility Tests
+    runs-on: macos-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Swift
+      uses: swift-actions/setup-swift@v1
+      
+    - name: Run Accessibility Tests
+      run: |
+        xcodebuild test -scheme BrainIncubator -destination 'platform=iOS Simulator,name=iPhone 14,OS=latest' -only-testing:BrainIncubatorTests/AccessibilityTests
+
+  store-submission-validation:
+    name: Validate Store Submission
+    runs-on: macos-latest
+    needs: [deployment-tests, accessibility-tests]
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Validate App Store Connect Metadata
+      run: |
+        xcrun altool --validate-app -f path/to/BrainIncubator.ipa -t ios --apiKey "${{ secrets.APP_STORE_CONNECT_API_KEY }}" --apiIssuer "${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}"
+        
+    - name: Check Export Compliance
+      run: |
+        swift run deployment-check verify-export-compliance
+        
+    - name: Verify In-App Purchases
+      run: |
+        swift run deployment-check verify-iap-configuration
