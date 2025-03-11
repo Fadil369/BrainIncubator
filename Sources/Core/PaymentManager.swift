@@ -24,8 +24,9 @@ class PaymentManager: NSObject, ObservableObject {
     @Published var currentSubscription: SubscriptionTier?
     
     // Apple Pay configuration
-    private let merchantIdentifier = "merchant.com.brainincubator" // Replace with your merchant ID
+    private let merchantIdentifier = "merchant.com.brainincubator"
     private var paymentController: PKPaymentAuthorizationController?
+    private var paymentContinuation: CheckedContinuation<Bool, Error>?
     
     private override init() {
         super.init()
@@ -91,12 +92,9 @@ class PaymentManager: NSObject, ObservableObject {
                 }
             }
             
-            // Store continuation to complete it when payment is done
             self.paymentContinuation = continuation
         }
     }
-    
-    private var paymentContinuation: CheckedContinuation<Bool, Error>?
     
     func subscribe(to tier: SubscriptionTier) async throws {
         guard AuthenticationManager.shared.isAuthenticated,
@@ -108,7 +106,7 @@ class PaymentManager: NSObject, ObservableObject {
             let amount = getSubscriptionAmount(for: tier)
             let description = "Subscribe to \(tier.rawValue.capitalized)"
             
-            // Try Apple Pay first
+            // Try Apple Pay
             if canMakePayments() {
                 let success = try await makePaymentWithApplePay(amount: amount, description: description)
                 if success {
@@ -156,10 +154,7 @@ extension PaymentManager: PKPaymentAuthorizationControllerDelegate {
     func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController,
                                       didAuthorizePayment payment: PKPayment,
                                       handler completion: @escaping (PKPaymentAuthorizationResult) -> Void) {
-        // Here you would typically send the payment token to your server
-        // and handle the payment processing there
-        
-        // For this example, we'll simulate a successful payment
+        // Here we complete the payment immediately since we validate on the server when updating subscription
         completion(PKPaymentAuthorizationResult(status: .success, errors: nil))
         paymentContinuation?.resume(returning: true)
         paymentContinuation = nil

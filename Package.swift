@@ -1,11 +1,11 @@
-// swift-tools-version:5.7
+// swift-tools-version:5.9
 import PackageDescription
 
 let package = Package(
     name: "BrainIncubator",
     defaultLocalization: "en",
     platforms: [
-        .iOS(.v15)
+        .iOS(.v16)
     ],
     products: [
         .library(
@@ -15,8 +15,7 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", exact: "10.19.0"),
-        .package(url: "https://github.com/stripe/stripe-ios.git", exact: "23.18.0")
+        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "10.21.0")
     ],
     targets: [
         .target(
@@ -24,9 +23,7 @@ let package = Package(
             dependencies: [
                 .product(name: "FirebaseAnalytics", package: "firebase-ios-sdk"),
                 .product(name: "FirebaseAuth", package: "firebase-ios-sdk"),
-                .product(name: "FirebaseFirestore", package: "firebase-ios-sdk"),
-                .product(name: "StripePayments", package: "stripe-ios"),
-                .product(name: "StripePaymentsUI", package: "stripe-ios")
+                .product(name: "FirebaseFirestore", package: "firebase-ios-sdk")
             ],
             path: "Sources",
             exclude: ["App/Info.plist"],
